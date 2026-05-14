@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import Dashboard from './Dashboard';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
@@ -113,32 +114,7 @@ const App = () => {
 
   // Dashboard View
   if (isLoggedIn) {
-    return (
-      <div className="page-container">
-        <div className="card dashboard-card fade-in">
-          <h2 className="title">Dashboard</h2>
-          {userEmail && <p className="subtitle">Welcome back, <strong>{userEmail}</strong></p>}
-          
-          <div className="button-group">
-            <button onClick={fetchProtectedProfile} className="btn btn-primary">
-              Fetch Protected Profile
-            </button>
-            <button onClick={handleLogout} className="btn btn-outline">
-              Logout
-            </button>
-          </div>
-
-          {error && <div className="alert alert-error">{error}</div>}
-
-          {profileData && (
-            <div className="profile-card slide-down">
-              <h3>Profile Data</h3>
-              <pre>{JSON.stringify(profileData, null, 2)}</pre>
-            </div>
-          )}
-        </div>
-      </div>
-    );
+    return <Dashboard userEmail={userEmail} onLogout={handleLogout} />;
   }
 
   // Auth View (Login / Register)
